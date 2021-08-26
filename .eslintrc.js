@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'plugin:@typescript-eslint/recommended'],
+  extends: ['plugin:react/recommended', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -12,9 +12,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', 'prettier'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'off',
     'no-use-before-define': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
@@ -24,7 +23,7 @@ module.exports = {
     'no-shadow': 'off',
     'react/button-has-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react/jsx-filename-extension': ['warn', {extensions: ['.tsx']}],
+    'react/jsx-filename-extension': ['warn', {extensions: ['.tsx', '.js', '.jsx']}],
     'prettier/prettier': [
       'error',
       {
@@ -35,6 +34,8 @@ module.exports = {
       'error',
       'ignorePackages',
       {
+        js: 'never',
+        jsx: 'never',
         ts: 'never',
         tsx: 'never',
       },
