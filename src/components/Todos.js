@@ -1,8 +1,7 @@
 import React, { useState, useSelector, useDispatch } from 'react';
-import {connect} from 'react-redux';
 import {addTodos} from '../redux/reducer';
 
-const Todos = ({addTodo, todos}) => {
+const Todos = () => {
   const [todo, setTodo] = useState('');
   const selector = useSelector((state) => state.value);
   const dispatch = useDispatch();
@@ -11,12 +10,13 @@ const Todos = ({addTodo, todos}) => {
     if (todo === '') {
       alert('Input is empty');
     } else {
-      addTodo({
+      const todoItem = {
         id: Math.floor(Math.random() * 1000),
         item: todo,
         completed: false,
-      });
-      dispatch(addTodo(''));
+      };
+      dispatch(addTodo(todoItem));
+      setTodo('');
     }
   };
 
