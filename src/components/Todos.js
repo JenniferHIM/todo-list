@@ -1,9 +1,10 @@
-import React, { useState, useSelector, useDispatch } from 'react';
-import {addTodos} from '../redux/reducer';
+import React, { useState, useDispatch } from 'react';
+import { addTodos } from '../redux/reducer';
+import styles from '../styles/main.scss';
 
 const Todos = () => {
   const [todo, setTodo] = useState('');
-  const selector = useSelector((state) => state.value);
+  // const selector = useSelector((state) => state.value);
   const dispatch = useDispatch();
 
   const addTodo = () => {
@@ -26,15 +27,15 @@ const Todos = () => {
 
   return (
     <div className={addTodos}>
-      <input type="text" onChange={(e) => handleChange(e)} className={todoInput} value={todo} />
-      <button className={addBtn} onClick={add}>
+      <input type="text" onChange={(e) => handleChange(e)} className={styles.todoInput} value={todo} />
+      <button className={styles.addBtn} onClick={addTodo}>
         Add
       </button>
       <br />
 
       <ul>
-        {todos.length &&
-          todos.map((item) => {
+        {todo.length &&
+          todo.map((item) => {
             return <li key={item.id}>{item.item}</li>;
           })}
       </ul>
