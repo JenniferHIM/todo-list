@@ -4,7 +4,6 @@ import styles from '../styles/main.scss';
 
 const Todos = () => {
   const [todo, setTodo] = useState('');
-  // const selector = useSelector((state) => state.value);
   const dispatch = useDispatch();
 
   const addTodo = () => {
