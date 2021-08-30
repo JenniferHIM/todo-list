@@ -3,8 +3,7 @@ import {AiFillEdit} from 'react-icons/ai';
 import { IoCheckmarkDoneSharp, IoClose } from 'react-icons/io5';
 import styles from '../styles/main.scss';
 
-const TodoItem = (props) => {
-  const {item, updateTodo, removeTodo, completeTodo} = props;
+const TodoItem = ({item, updateTodo, removeTodo, completeTodo}) => {
 
   const inputRef = useRef(true);
 
@@ -30,7 +29,7 @@ const TodoItem = (props) => {
         onKeyPress={(e) => update(item.id, inputRef.current.value, e)}
       />
       <div className={styles.Btns}>
-        <button onClick={() => changeFocus()}>
+        <button onClick={changeFocus}>
           <AiFillEdit />
         </button>
         {item.completed === false && (
