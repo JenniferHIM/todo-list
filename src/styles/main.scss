@@ -28,7 +28,7 @@ body {
 .App {
   margin-top: 48px;
   display: flex;
-  flex-direction: column;
+  @include displayFlex(column, 0, 0);
 }
 
 .App h1 {
@@ -42,24 +42,23 @@ body {
 
 .addTodos {
   display: flex;
-  justify-content: center;
+  @include displayFlex(center, 0, 0);
 }
 
 .todoInput {
   min-width: 240px;
   width: 40vw;
-
   max-height: 40px;
   background-color: $white-color;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-
   align-self: center;
-}
-.todoInput:focus {
+
+  &:focus {
   outline: none;
   border: 2px solid rgb(67, 58, 168);
+}
 }
 
 .addBtn {
@@ -84,34 +83,33 @@ body {
 .displayTodos {
   margin-top: 48px;
   display: flex;
-  @include displayFlex(column, 0, center);
-}
+  @include displayFlex(0, center, column);
 
-.displayTodos .buttons {
+  &.buttons {
   margin-bottom: 32px;
-}
 
-.displayTodos .buttons button {
+  &button {
   padding: 8px 20px;
   border-radius: 20px;
   cursor: pointer;
   border: none;
 }
-
-.displayTodos .buttons button:focus {
+  &button:focus {
   outline: none;
 }
 
-.displayTodos .buttons button:not(:last-child) {
+  &button:not(:last-child) {
   margin-right: 30px;
 }
+}
 
-.displayTodos ul {
+  &ul {
   list-style: none;
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
   margin-left: 5%;
+}
 }
 
 .completed {

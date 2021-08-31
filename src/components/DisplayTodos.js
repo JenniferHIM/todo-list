@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   addTodos,
@@ -8,6 +8,52 @@ import {
 } from '../redux/reducer';
 import TodoItem from './TodoItem';
 import styles from '../styles/main.scss';
+
+const sortSwitch = (sort, todos, removeTodo, updateTodo, completeTodo) => {
+switch (sort) {
+  case 'active':
+    return todos.map((item) => {
+      return (
+        !item.completed && (
+          <TodoItem
+            key={item.id}
+            item={item}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+            completeTodo={completeTodo}
+          />
+        )
+      );
+    })
+  case 'completed':
+    return todos.map((item) => {
+      return (
+        item.completed === true && (
+          <TodoItem
+            key={item.id}
+            item={item}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+            completeTodo={completeTodo}
+          />
+        )
+      );
+    })
+  case 'all':
+    return todos.map((item) => {
+      return (
+        <TodoItem
+          key={item.id}
+          item={item}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+          completeTodo={completeTodo}
+        />
+      );
+    })
+default: return <div>null</div>;
+}
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -24,8 +70,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const DisplayTodos = (props) => {
+const DisplayTodos = ({todos, removeTodo, updateTodo, completeTodo} ) => {
   const [sort, setSort] = useState('active');
+  
   return (
     <div className={styles.displayTodos}>
       <div className={styles.buttons}>
@@ -34,51 +81,7 @@ const DisplayTodos = (props) => {
         <button onClick={() => setSort('all')}>All</button>
       </div>
       <ul>
-        {props.todos.length > 0 && sort === 'active'
-          ? props.todos.map((item) => {
-            return (
-              item.completed === false && (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={props.removeTodo}
-                  updateTodo={props.updateTodo}
-                  completeTodo={props.completeTodo}
-                />
-              )
-            );
-          })
-          : null}
-        {/* for completed items */}
-        {props.todos.length > 0 && sort === 'completed'
-          ? props.todos.map((item) => {
-            return (
-              item.completed === true && (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  removeTodo={props.removeTodo}
-                  updateTodo={props.updateTodo}
-                  completeTodo={props.completeTodo}
-                />
-              )
-            );
-          })
-          : null}
-        {/* for all items */}
-        {props.todos.length > 0 && sort === 'all'
-          ? props.todos.map((item) => {
-            return (
-              <TodoItem
-                key={item.id}
-                item={item}
-                removeTodo={props.removeTodo}
-                updateTodo={props.updateTodo}
-                completeTodo={props.completeTodo}
-              />
-            );
-          })
-          : null}
+        {!!todos.length && sortSwitch(sort, todos, removeTodo, updateTodo, completeTodo)}
       </ul>
     </div>
   );
