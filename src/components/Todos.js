@@ -1,12 +1,14 @@
-import React, { useState, useDispatch } from 'react';
-import { addTodos } from '../redux/reducer';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodos } from '../redux/slice';
 import styles from '../styles/main.scss';
 
 const Todos = () => {
   const [todo, setTodo] = useState('');
+  const todos = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const addTodo = () => {
+  const add = () => {
     if (todo === '') {
       alert('Input is empty');
     } else {
@@ -15,7 +17,7 @@ const Todos = () => {
         item: todo,
         completed: false,
       };
-      dispatch(addTodo(todoItem));
+      dispatch(addTodos(todoItem));
       setTodo('');
     }
   };
@@ -25,19 +27,12 @@ const Todos = () => {
   };
 
   return (
-    <div className={addTodos}>
-      <input type="text" onChange={(e) => handleChange(e)} className={styles.todoInput} value={todo} />
-      <button className={styles.addBtn} onClick={addTodo}>
+    <div className={styles.addTodos}>
+      <input className={styles.todoInput} type="text" onChange={(e) => handleChange(e)} value={todo} />
+      <button className={styles.addBtn} onClick={add}>
         Add
       </button>
       <br />
-
-      <ul>
-        {todo.length &&
-          todo.map((item) => {
-            return <li key={item.id}>{item.item}</li>;
-          })}
-      </ul>
     </div>
   );
 };

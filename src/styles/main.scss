@@ -1,4 +1,5 @@
 @import "../styles/mixin.scss";
+@import "../styles/variables.scss";
 
 html {
   line-height: 1.15;
@@ -20,64 +21,108 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  color: #222;
+  color: $black-color;
   overflow: hidden;
 }
 
 .App {
-  margin-top: 3rem;
+  margin-top: 48px;
   display: flex;
-  flex-direction: column;
+  @include displayFlex(column, 0, 0);
 }
 
 .App h1 {
   display: inline;
   text-align: center;
-  margin-bottom: 2rem;
-  color: #e1ebfd;
+  margin-bottom: 20px;
+  color: $white-color;
 
   text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
 }
 
 .addTodos {
   display: flex;
-  justify-content: center;
+  @include displayFlex(center, 0, 0);
 }
 
 .todoInput {
-  min-width: 15rem;
+  min-width: 240px;
   width: 40vw;
-
-  max-height: 2.5rem;
-  background-color: #e1ebfd;
+  max-height: 40px;
+  background-color: $white-color;
   border: none;
   border-radius: 5px;
-  padding: 0.5rem 1rem;
-
+  padding: 10px 20px;
   align-self: center;
-}
-.todoInput:focus {
+
+  &:focus {
   outline: none;
   border: 2px solid rgb(67, 58, 168);
 }
+}
 
 .addBtn {
-  margin-left: 1rem;
-  background-color: #271c6c;
-  color: #e1ebfd;
+  margin-left: 15px;
+  background-color: $btn-bcg;
+  color: $white-color;
   border-radius: 50%;
-  border: 2px solid #e1ebfd;
-  font-size: 1.5rem;
-  width: 3.2rem;
-  height: 3.2rem;
+  border: 2px solid $white-color;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  box-shadow: 2px 4px 10px #271c6c;
+  box-shadow: 2px 4px 10px $btn-bcg;
 
- @include displayFlex;
+ @include displayFlex(0, center, center);
 }
 
 .addBtn:focus {
   outline: none;
+}
+
+.displayTodos {
+  margin-top: 48px;
+  display: flex;
+  @include displayFlex(0, center, column);
+
+  &.buttons {
+  margin-bottom: 32px;
+
+  &button {
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+}
+  &button:focus {
+  outline: none;
+}
+
+  &button:not(:last-child) {
+  margin-right: 30px;
+}
+}
+
+  &ul {
+  list-style: none;
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  margin-left: 5%;
+}
+}
+
+.completed {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: $background-color;
+  border: 2px solid $border-color;
+  color: $white-color;
+
+  font-size: 14px;
+  padding: 10px 30px;
+  border-radius: 20px;
 }
 
 

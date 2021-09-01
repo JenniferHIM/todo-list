@@ -2,9 +2,15 @@ import React, {useRef} from 'react';
 import {AiFillEdit} from 'react-icons/ai';
 import { IoCheckmarkDoneSharp, IoClose } from 'react-icons/io5';
 import styles from '../styles/main.scss';
+import { useDispatch } from 'react-redux';
+import {
+  removeTodos,
+  updateTodos,
+  completeTodos
+} from '../redux/slice';
 
-const TodoItem = ({item, updateTodo, removeTodo, completeTodo}) => {
-
+const TodoItem = ({ item }) => {
+  const dispatch = useDispatch();
   const inputRef = useRef(true);
 
   const changeFocus = () => {
@@ -15,7 +21,7 @@ const TodoItem = ({item, updateTodo, removeTodo, completeTodo}) => {
   const update = (id, value, e) => {
     if (e.which === 13) {
       //here 13 is key code for enter key
-      updateTodo({id, item: value});
+      dispatch(updateTodos({id, item: value}));
       inputRef.current.disabled = true;
     }
   };
@@ -33,11 +39,11 @@ const TodoItem = ({item, updateTodo, removeTodo, completeTodo}) => {
           <AiFillEdit />
         </button>
         {item.completed === false && (
-          <button style={{color: 'green'}} onClick={() => completeTodo(item.id)}>
+          <button style={{color: 'green'}} onClick={() => dispatch(completeTodos(item.id))}>
             <IoCheckmarkDoneSharp />
           </button>
         )}
-        <button style={{color: 'red'}} onClick={() => removeTodo(item.id)}>
+        <button style={{color: 'red'}} onClick={() => dispatch(removeTodos(item.id))}>
           <IoClose />
         </button>
       </div>
