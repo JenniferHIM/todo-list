@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodos } from '../redux/reducer';
+import { addTodos } from '../redux/slice';
 import styles from '../styles/main.scss';
 
 const Todos = () => {
@@ -27,8 +27,8 @@ const Todos = () => {
   };
 
   return (
-    <div className={addTodos}>
-      <input type="text" onChange={(e) => handleChange(e)} className={styles.todoInput} value={todo} />
+    <div className={styles.addTodos}>
+      <input className={styles.todoInput} type="text" onChange={(e) => handleChange(e)} value={todo} />
       <button className={styles.addBtn} onClick={add}>
         Add
       </button>
